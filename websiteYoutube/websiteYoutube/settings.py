@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'music.apps.MusicConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    'channels',
 
 ]
 
@@ -48,6 +49,16 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
     )
+}
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "asgi_redis.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("localhost", 6379)],
+        },
+        "ROUTING": "websiteYoutube.routing.channel_routing",
+    },
 }
 
 MIDDLEWARE = [
